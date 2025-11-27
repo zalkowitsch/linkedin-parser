@@ -1,0 +1,24 @@
+{
+  "name": "pdf-parser-test",
+  "version": "1.0.0",
+  "description": "TypeScript environment to test PDF parsing with Hono",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "node --loader tsx/esm src/test.ts"
+  },
+  "dependencies": {
+    "hono": "^4.0.0",
+    "@hono/node-server": "^1.8.0",
+    "pdf-parse": "^1.1.1",
+    "@types/pdf-parse": "^1.1.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.5",
+    "tsx": "^4.6.2"
+  },
+  "type": "module"
+}
