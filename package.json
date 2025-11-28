@@ -1,7 +1,7 @@
 {
-  "name": "@zalko/pdf-parser-test",
+  "name": "@zalko/linkedin-parser",
   "version": "1.0.0",
-  "description": "PDF parser with test data generation and comprehensive Jest testing for resume parsing",
+  "description": "LinkedIn resume PDF parser with comprehensive Jest testing and test data generation",
   "main": "dist/server.js",
   "author": {
     "name": "Arkady Zalkowitsch",
@@ -11,7 +11,7 @@
   "keywords": ["pdf", "parser", "resume", "linkedin", "jest", "testing"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zalkowitsch/pdf-parser-test.git"
+    "url": "git+https://github.com/zalkowitsch/linkedin-parser.git"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
