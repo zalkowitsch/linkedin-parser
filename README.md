@@ -71,7 +71,7 @@ yarn add @zalko/linkedin-parser pdf-parse
 pnpm add @zalko/linkedin-parser pdf-parse
 ```
 
-**Note:** `pdf-parse` is required as a peer dependency to keep the bundle size minimal.
+**Note:** Starting from v1.0.2, `pdf-parse` is a peer dependency to minimize bundle size.
 
 ## 🚀 Quick Start
 
