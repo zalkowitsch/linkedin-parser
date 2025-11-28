@@ -81,58 +81,25 @@ export class EducationParser {
   }
 
   private static looksLikeInstitution(line: string): boolean {
-    const lowerLine = line.toLowerCase();
-
-    // Common institution keywords
-    const institutionKeywords = [
-      'university',
-      'college',
-      'school',
-      'institute',
-      'academy',
-      'universidade',
-      'faculdade',
-      'escola',
-      'instituto',
-    ];
+    const lower = line.toLowerCase();
 
     return (
       line.length > 5 &&
       line.length < 100 &&
-      (institutionKeywords.some(keyword => lowerLine.includes(keyword)) ||
-        /^[A-Z][a-z]+(?:\s+[A-Z][a-z]*)*$/.test(line)) && // Title case pattern
+      (/university|college|school|institute/.test(lower) ||
+        /^[A-Z][a-z]+(?:\s+[A-Z][a-z]*)*$/.test(line)) &&
       !this.looksLikeDegree(line) &&
       !this.looksLikeYear(line)
     );
   }
 
   private static looksLikeDegree(line: string): boolean {
-    const lowerLine = line.toLowerCase();
-
-    const degreeKeywords = [
-      'bachelor',
-      'master',
-      'phd',
-      'doctorate',
-      'mba',
-      'bsc',
-      'msc',
-      'bacharelado',
-      'mestrado',
-      'doutorado',
-      'graduação',
-      'engineering',
-      'science',
-      'arts',
-      'business',
-      'computer science',
-      'information technology',
-    ];
+    const lower = line.toLowerCase();
 
     return (
       line.length > 3 &&
       line.length < 80 &&
-      degreeKeywords.some(keyword => lowerLine.includes(keyword)) &&
+      /bachelor|master|phd|mba|engineering|science|business/.test(lower) &&
       !this.looksLikeYear(line)
     );
   }

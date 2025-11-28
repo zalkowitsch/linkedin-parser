@@ -1,15 +1,20 @@
 import esbuild from 'esbuild';
 
-// Build minified version
+// Build ultra-minified version
 esbuild.build({
   entryPoints: ['src/index.ts'],
   bundle: true,
   outfile: 'dist/index.min.js',
   format: 'esm',
   platform: 'node',
-  target: 'node16',
+  target: 'node18',
   minify: true,
+  minifyWhitespace: true,
+  minifyIdentifiers: true,
+  minifySyntax: true,
   sourcemap: true,
   external: ['pdf-parse'],
   tsconfig: 'tsconfig.json',
+  treeShaking: true,
+  drop: ['console', 'debugger'],
 }).catch(() => process.exit(1));

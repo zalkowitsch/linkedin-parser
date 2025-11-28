@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/npm/v/@zalko/linkedin-parser?style=flat-square&color=blue" alt="npm version" />
   <img src="https://img.shields.io/npm/dt/@zalko/linkedin-parser?style=flat-square&color=green" alt="downloads" />
   <img src="https://img.shields.io/badge/coverage-95.6%25-brightgreen?style=flat-square" alt="coverage" />
-  <img src="https://img.shields.io/badge/bundle_size-42.6kB-orange?style=flat-square" alt="bundle size" />
+  <img src="https://img.shields.io/badge/bundle_size-3.0kB_gzipped-orange?style=flat-square" alt="bundle size" />
   <img src="https://img.shields.io/badge/node-18+-darkgreen?style=flat-square&logo=node.js" alt="node version" />
   <img src="https://img.shields.io/npm/types/@zalko/linkedin-parser?style=flat-square&color=blue" alt="typescript" />
   <img src="https://img.shields.io/npm/l/@zalko/linkedin-parser?style=flat-square&color=red" alt="license" />
@@ -278,9 +278,9 @@ npm run clean
 
 ## 📊 Performance
 
-- **Processing time**: ~62ms average for typical LinkedIn PDF
-- **Memory usage**: Minimal memory footprint (~6MB)
-- **Bundle size**: Lightweight with only essential dependencies
+- **Processing time**: ~70ms average for typical LinkedIn PDF
+- **Memory usage**: Minimal memory footprint (~8MB)
+- **Bundle size**: Ultra-lightweight at 3.0kB gzipped
 
 ## 🛡️ Quality & Trust
 
