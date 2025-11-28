@@ -1,6 +1,6 @@
 {
   "name": "@zalko/linkedin-parser",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "LinkedIn resume PDF parser with comprehensive Jest testing and test data generation",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
