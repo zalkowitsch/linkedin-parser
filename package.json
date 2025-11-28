@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/zalkowitsch/linkedin-parser#readme",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "build": "npm run clean && tsc && npm run build:bundle && npm run build:minify",

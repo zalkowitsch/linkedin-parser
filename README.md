@@ -315,14 +315,14 @@ npm run clean
 
 <div align="center">
 
-![Node.js](https://img.shields.io/badge/Node.js-16%2B-brightgreen?style=flat-square&logo=node.js)
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-brightgreen?style=flat-square&logo=node.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue?style=flat-square&logo=typescript)
 ![ES2022](https://img.shields.io/badge/ES2022-Compatible-orange?style=flat-square&logo=javascript)
 
 </div>
 
 **Supported Environments:**
-- ✅ Node.js 16+ (ES2022 support)
+- ✅ Node.js 18+ (ES2022 support)
 - ✅ TypeScript 5.0+
 - ✅ ESM (ES Modules)
 - ✅ CommonJS (via build)

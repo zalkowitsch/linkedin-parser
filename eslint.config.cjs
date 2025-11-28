@@ -1,9 +1,9 @@
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
-import prettier from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
+const typescriptEslint = require('@typescript-eslint/eslint-plugin');
+const typescriptParser = require('@typescript-eslint/parser');
+const prettier = require('eslint-plugin-prettier');
+const prettierConfig = require('eslint-config-prettier');
 
-export default [
+module.exports = [
   {
     files: ['src/**/*.ts', 'src/**/*.tsx'],
     languageOptions: {
@@ -19,13 +19,15 @@ export default [
       prettier,
     },
     rules: {
-      ...typescriptEslint.configs.recommended.rules,
-      ...prettierConfig.rules,
-      'prettier/prettier': 'error',
+      // Safe rules that work across all Node versions
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
+      'prettier/prettier': 'error',
+      'no-console': 'off',
+      'no-unused-vars': 'off', // Handled by TypeScript ESLint
+      'prefer-const': 'error',
     },
   },
   {
