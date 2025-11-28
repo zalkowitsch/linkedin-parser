@@ -1,24 +1,42 @@
 {
-  "name": "pdf-parser-test",
+  "name": "@zalkowitsch/pdf-parser-test",
   "version": "1.0.0",
-  "description": "TypeScript environment to test PDF parsing with Hono",
+  "description": "PDF parser with test data generation and comprehensive Jest testing for resume parsing",
   "main": "dist/server.js",
+  "author": {
+    "name": "Arkady Zalkowitsch",
+    "email": "arkady@zalko.com"
+  },
+  "license": "MIT",
+  "keywords": ["pdf", "parser", "resume", "linkedin", "jest", "testing"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zalkowitsch/pdf-parser-test.git"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "node --loader tsx/esm src/test.ts"
+    "test": "jest --config jest.pdf-test.config.js",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose",
+    "test:e2e": "tsx src/e2e-test.ts",
+    "test:pdf": "node test-pdf.js"
   },
   "dependencies": {
-    "hono": "^4.0.0",
     "@hono/node-server": "^1.8.0",
-    "pdf-parse": "^1.1.1",
-    "@types/pdf-parse": "^1.1.4"
+    "@types/pdf-parse": "^1.1.4",
+    "hono": "^4.0.0",
+    "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.10.5",
-    "tsx": "^4.6.2"
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3"
   },
   "type": "module"
 }
