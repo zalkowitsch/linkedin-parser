@@ -53,11 +53,15 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "pdf-parse": "^1.1.1"
-  },
+  "dependencies": {},
   "peerDependencies": {
+    "pdf-parse": "^1.1.1",
     "@types/pdf-parse": "^1.1.4"
+  },
+  "peerDependenciesMeta": {
+    "@types/pdf-parse": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.3",

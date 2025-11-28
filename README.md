@@ -60,16 +60,18 @@
 ## 📦 Installation
 
 ```bash
-npm install @zalko/linkedin-parser
+npm install @zalko/linkedin-parser pdf-parse
 ```
 
 ```bash
-yarn add @zalko/linkedin-parser
+yarn add @zalko/linkedin-parser pdf-parse
 ```
 
 ```bash
-pnpm add @zalko/linkedin-parser
+pnpm add @zalko/linkedin-parser pdf-parse
 ```
+
+**Note:** `pdf-parse` is required as a peer dependency to keep the bundle size minimal.
 
 ## 🚀 Quick Start
 
