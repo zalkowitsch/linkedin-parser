@@ -11,7 +11,7 @@
   "keywords": ["pdf", "parser", "resume", "linkedin", "jest", "testing"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zalko/pdf-parser-test.git"
+    "url": "git+https://github.com/zalkowitsch/pdf-parser-test.git"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
