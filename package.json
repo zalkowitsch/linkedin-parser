@@ -29,6 +29,10 @@
     "type": "git",
     "url": "git+https://github.com/zalkowitsch/linkedin-parser.git"
   },
+  "homepage": "https://github.com/zalkowitsch/linkedin-parser#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "build": "npm run clean && tsc && npm run build:bundle && npm run build:minify",
     "build:bundle": "rollup -c",

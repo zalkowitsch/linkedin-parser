@@ -5,19 +5,19 @@
 <p>
   <img src="https://img.shields.io/npm/v/@zalko/linkedin-parser?style=flat-square&color=blue" alt="npm version" />
   <img src="https://img.shields.io/npm/dt/@zalko/linkedin-parser?style=flat-square&color=green" alt="downloads" />
-  <img src="https://img.shields.io/badge/coverage-96%25-brightgreen?style=flat-square" alt="coverage" />
-  <img src="https://img.shields.io/github/actions/workflow/status/zalkowitsch/linkedin-parser/test.yml?style=flat-square&label=tests" alt="tests" />
+  <img src="https://img.shields.io/badge/coverage-95.6%25-brightgreen?style=flat-square" alt="coverage" />
   <img src="https://img.shields.io/bundlephobia/minzip/@zalko/linkedin-parser?style=flat-square&color=orange" alt="bundle size" />
   <img src="https://img.shields.io/node/v/@zalko/linkedin-parser?style=flat-square&color=darkgreen" alt="node version" />
   <img src="https://img.shields.io/npm/types/@zalko/linkedin-parser?style=flat-square&color=blue" alt="typescript" />
-  <img src="https://img.shields.io/github/license/zalkowitsch/linkedin-parser?style=flat-square&color=purple" alt="license" />
-  <img src="https://img.shields.io/npm/l/@zalko/linkedin-parser?style=flat-square&color=red" alt="maintenance" />
+  <img src="https://img.shields.io/npm/l/@zalko/linkedin-parser?style=flat-square&color=red" alt="license" />
 </p>
 
 **A clean, lightweight TypeScript library for parsing LinkedIn PDF resumes and extracting structured profile data.**
 
+> ℹ️ **Note:** This is a newly published package. Download statistics and bundle size metrics may take 24-48 hours to populate.
+
 <p>
-  <img src="https://img.shields.io/snyk/vulnerabilities/npm/@zalko/linkedin-parser?style=flat-square&color=red" alt="vulnerabilities" />
+  <img src="https://img.shields.io/badge/tests-51%20passing-success?style=flat-square" alt="tests" />
   <img src="https://img.shields.io/github/commit-activity/m/zalkowitsch/linkedin-parser?style=flat-square&color=yellow" alt="activity" />
   <img src="https://img.shields.io/github/last-commit/zalkowitsch/linkedin-parser?style=flat-square&color=lightgrey" alt="last commit" />
 </p>
@@ -287,7 +287,7 @@ npm run clean
 <table>
   <tr>
     <td align="center">🧪</td>
-    <td><strong>Test Coverage</strong><br/>96%+ code coverage with comprehensive test suite</td>
+    <td><strong>Test Coverage</strong><br/>95.6% code coverage with comprehensive test suite</td>
   </tr>
   <tr>
     <td align="center">🔒</td>
