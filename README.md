@@ -17,7 +17,7 @@
 > ℹ️ **Note:** This is a newly published package. Download statistics and bundle size metrics may take 24-48 hours to populate.
 
 <p>
-  <img src="https://img.shields.io/badge/tests-51%20passing-success?style=flat-square" alt="tests" />
+  <img src="https://img.shields.io/github/actions/workflow/status/zalkowitsch/linkedin-parser/ci.yml?style=flat-square&label=tests" alt="tests" />
   <img src="https://img.shields.io/github/commit-activity/m/zalkowitsch/linkedin-parser?style=flat-square&color=yellow" alt="activity" />
   <img src="https://img.shields.io/github/last-commit/zalkowitsch/linkedin-parser?style=flat-square&color=lightgrey" alt="last commit" />
 </p>
