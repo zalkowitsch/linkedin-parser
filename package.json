@@ -2,40 +2,77 @@
   "name": "@zalko/linkedin-parser",
   "version": "1.0.0",
   "description": "LinkedIn resume PDF parser with comprehensive Jest testing and test data generation",
-  "main": "dist/server.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "author": {
     "name": "Arkady Zalkowitsch",
     "email": "arkady@zalko.com"
   },
   "license": "MIT",
-  "keywords": ["pdf", "parser", "resume", "linkedin", "jest", "testing"],
+  "keywords": [
+    "pdf",
+    "parser",
+    "resume",
+    "linkedin",
+    "jest",
+    "testing"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zalkowitsch/linkedin-parser.git"
   },
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "jest --config jest.pdf-test.config.js",
+    "build": "npm run clean && tsc && npm run build:bundle && npm run build:minify",
+    "build:bundle": "rollup -c",
+    "build:minify": "node esbuild.config.js",
+    "build:dev": "tsc",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:verbose": "jest --verbose",
-    "test:e2e": "tsx src/e2e-test.ts",
-    "test:pdf": "node test-pdf.js"
+    "clean": "rm -rf dist coverage",
+    "size:check": "ls -lh dist/index.* | awk '{print $5, $9}'",
+    "quality:check": "npm run lint && npm run format:check && npm run test:coverage",
+    "prepublishOnly": "npm run quality:check && npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "@hono/node-server": "^1.8.0",
-    "@types/pdf-parse": "^1.1.4",
-    "hono": "^4.0.0",
     "pdf-parse": "^1.1.1"
   },
+  "peerDependencies": {
+    "@types/pdf-parse": "^1.1.4"
+  },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.10.5",
+    "@types/pdf-parse": "^1.1.4",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "esbuild": "^0.27.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "jest": "^30.2.0",
+    "prettier": "^3.7.1",
+    "rollup": "^4.53.3",
+    "terser": "^5.44.1",
     "ts-jest": "^29.4.5",
-    "tsx": "^4.6.2",
+    "tslib": "^2.8.1",
     "typescript": "^5.3.3"
   },
   "type": "module"

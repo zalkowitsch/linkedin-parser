@@ -1,0 +1,35 @@
+import typescript from '@rollup/plugin-typescript';
+import resolve from '@rollup/plugin-node-resolve';
+
+export default {
+  input: 'src/index.ts',
+  output: [
+    {
+      file: 'dist/index.js',
+      format: 'es',
+      sourcemap: true,
+    },
+    {
+      file: 'dist/index.cjs',
+      format: 'cjs',
+      sourcemap: true,
+    },
+    {
+      file: 'dist/index.min.js',
+      format: 'es',
+      sourcemap: true,
+    },
+  ],
+  external: ['pdf-parse'],
+  plugins: [
+    resolve({
+      preferBuiltins: true,
+    }),
+    typescript({
+      tsconfig: './tsconfig.json',
+      declaration: true,
+      declarationDir: 'dist',
+      rootDir: 'src',
+    }),
+  ],
+};
