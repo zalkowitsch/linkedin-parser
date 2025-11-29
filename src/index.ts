@@ -1,9 +1,9 @@
-import pdfParse from 'pdf-parse';
-import { BasicInfoParser } from './parsers/basic-info';
-import { ListParser } from './parsers/lists';
-import { ExperienceParser } from './parsers/experience';
-import { EducationParser } from './parsers/education';
-import { cleanPDFText } from './utils/text-utils';
+import { StructuralParser } from './parsers/structural-parser.js';
+import { ExperienceStructuralParser } from './parsers/experience-structural.js';
+import { BasicInfoParser } from './parsers/basic-info.js';
+import { ListParser } from './parsers/lists.js';
+import { EducationParser } from './parsers/education.js';
+import { cleanPDFText } from './utils/text-utils.js';
 
 export interface Contact {
   email: string;
@@ -65,12 +65,19 @@ export async function parseLinkedInPDF(
   options: ParseOptions = {}
 ): Promise<ParseResult> {
   let text: string;
+  let structuralData: { textItems: any[]; layout: any } | null = null;
 
   // Handle both Buffer and string inputs
   if (Buffer.isBuffer(input)) {
     try {
-      const pdfData = await pdfParse(input);
-      text = pdfData.text;
+      // Use new structural parser for PDF buffers
+      structuralData = await StructuralParser.extractStructuredText(input);
+
+      // Create fallback text from structural data
+      const groups = StructuralParser.groupTextByProximity(structuralData.textItems);
+      const lines = StructuralParser.combineGroupedText(groups);
+      text = lines.join('\n');
+
     } catch (error) {
       throw new Error('PDF appears to be empty or unreadable');
     }
@@ -89,7 +96,28 @@ export async function parseLinkedInPDF(
   const basicInfo = BasicInfoParser.parse(cleanedText);
   const topSkills = ListParser.parseSkills(cleanedText);
   const languages = ListParser.parseLanguages(cleanedText);
-  const experience = ExperienceParser.parse(cleanedText);
+
+  // Use structural parser for experience if available, otherwise fallback
+  let experience: Experience[];
+  if (structuralData) {
+    const workExperiences = ExperienceStructuralParser.parseExperience(structuralData.textItems);
+
+    // Convert WorkExperience[] to Experience[] for compatibility
+    experience = workExperiences.flatMap(workExp =>
+      workExp.positions.map(position => ({
+        title: position.title,
+        company: workExp.organization,
+        duration: position.duration,
+        location: position.location,
+        description: position.description,
+      }))
+    );
+  } else {
+    // Fallback to old parser for string inputs
+    const { ExperienceParser } = await import('./parsers/experience.js');
+    experience = ExperienceParser.parse(cleanedText);
+  }
+
   const education = EducationParser.parse(cleanedText);
 
   // Combine into final profile

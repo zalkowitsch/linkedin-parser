@@ -1,4 +1,4 @@
-import { REGEX_PATTERNS } from './regex-patterns';
+import { REGEX_PATTERNS } from './regex-patterns.js';
 
 export function cleanPDFText(text: string): string {
   return text

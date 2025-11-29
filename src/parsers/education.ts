@@ -1,9 +1,9 @@
-import { REGEX_PATTERNS } from '../utils/regex-patterns';
+import { REGEX_PATTERNS } from '../utils/regex-patterns.js';
 import {
   extractSection,
   splitLines,
   normalizeWhitespace,
-} from '../utils/text-utils';
+} from '../utils/text-utils.js';
 
 export interface Education {
   degree: string;
@@ -49,9 +49,16 @@ export class EducationParser {
           location: '',
         };
       }
-      // Check if this looks like a degree
+      // Check if this looks like a degree (could contain year info)
       else if (currentEducation && this.looksLikeDegree(normalizedLine)) {
-        currentEducation.degree = normalizedLine;
+        // Check if the degree line also contains year info
+        const yearInDegree = this.extractYearFromLine(normalizedLine);
+        if (yearInDegree) {
+          currentEducation.degree = normalizedLine.replace(yearInDegree, '').trim();
+          currentEducation.year = yearInDegree;
+        } else {
+          currentEducation.degree = normalizedLine;
+        }
       }
       // Check if this looks like a year
       else if (currentEducation && this.looksLikeYear(normalizedLine)) {
@@ -109,8 +116,29 @@ export class EducationParser {
       /^\d{4}$/.test(line) ||
       /\b(19|20)\d{2}\b/.test(line) ||
       /\d{4}\s*-\s*\d{4}/.test(line) ||
-      /\d{4}\s*-\s*present/i.test(line)
+      /\d{4}\s*-\s*present/i.test(line) ||
+      /\(\d{4}\s*-\s*\d{4}\)/.test(line)
     );
+  }
+
+  private static extractYearFromLine(line: string): string {
+    // Extract year patterns from lines that might contain both degree and year info
+    const yearPatterns = [
+      /\(\d{4}\s*-\s*\d{4}\)/,  // (2017 - 2018)
+      /·\s*\(\d{4}\s*-\s*\d{4}\)/, // · (2002 - 2005)
+      /\b\d{4}\s*-\s*\d{4}\b/, // 2017 - 2018
+      /\(\d{4}\)/,             // (2016)
+      /\b\d{4}\b/,             // 2016
+    ];
+
+    for (const pattern of yearPatterns) {
+      const match = line.match(pattern);
+      if (match) {
+        return match[0].replace(/[()·]/g, '').trim();
+      }
+    }
+
+    return '';
   }
 
   private static looksLikeLocation(line: string): boolean {

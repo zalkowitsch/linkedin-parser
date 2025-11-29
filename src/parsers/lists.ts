@@ -1,9 +1,9 @@
-import { REGEX_PATTERNS } from '../utils/regex-patterns';
+import { REGEX_PATTERNS } from '../utils/regex-patterns.js';
 import {
   extractSection,
   splitLines,
   normalizeWhitespace,
-} from '../utils/text-utils';
+} from '../utils/text-utils.js';
 
 export interface Language {
   language: string;
@@ -70,12 +70,15 @@ export class ListParser {
   }
 
   private static extractLanguageInfo(line: string): Language | null {
-    const patterns = [
-      /^([A-Z][a-z]+)\s*\(([^)]+)\)/,
-      /^([A-Z][a-z]+)\s+(Native|Bilingual|Professional|Elementary|Limited|Fluent|Working)/i,
+    // Handle specific patterns from LinkedIn PDFs
+    const specificPatterns = [
+      // "Português (Native or Bilingual)" or "Inglês (Professional Working)"
+      /^([A-Za-zção]+)\s*\(([^)]+)\)/,
+      // "Inglês Professional Working" - without parentheses
+      /^([A-Za-zção]+)\s+((?:Professional|Native|Elementary|Bilingual|Working|Limited|Fluent)(?:\s+\w+)?)/i,
     ];
 
-    for (const pattern of patterns) {
+    for (const pattern of specificPatterns) {
       const match = line.match(pattern);
       if (match) {
         return {
@@ -101,7 +104,7 @@ export class ListParser {
       }
     }
 
-    if (line.length > 1 && line.length < 20 && /^[A-Z][a-z]+$/.test(line)) {
+    if (line.length > 1 && line.length < 20 && /^[A-Za-zção]+$/.test(line)) {
       return {
         language: line,
         proficiency: 'Unknown',

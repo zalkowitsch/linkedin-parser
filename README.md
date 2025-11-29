@@ -22,7 +22,7 @@
   <img src="https://img.shields.io/github/last-commit/zalkowitsch/linkedin-parser?style=flat-square&color=lightgrey" alt="last commit" />
 </p>
 
-[Installation](#installation) • [Quick Start](#quick-start) • [API Reference](#api-reference) • [Examples](#examples)
+[Installation](#installation) • [CLI Usage](#cli-usage) • [Quick Start](#quick-start) • [API Reference](#api-reference) • [Examples](#examples)
 
 </div>
 
@@ -59,17 +59,58 @@
 
 ## 📦 Installation
 
+### Library Usage
 ```bash
-npm install @zalko/linkedin-parser pdf-parse
+npm install @zalko/linkedin-parser
 ```
 
+### CLI Usage (Global)
 ```bash
-yarn add @zalko/linkedin-parser pdf-parse
+# Install globally for command-line usage
+npm install -g @zalko/linkedin-parser
+
+# Or use with npx (no installation required)
+npx @zalko/linkedin-parser path/to/resume.pdf
 ```
 
+## 🖥️ CLI Usage
+
+The package includes a command-line interface for easy PDF processing:
+
+### Basic Usage
 ```bash
-pnpm add @zalko/linkedin-parser pdf-parse
+# Parse a LinkedIn PDF and output JSON
+linkedin-pdf-parser ./resume.pdf
+
+# Save output to file
+linkedin-pdf-parser ./resume.pdf > profile.json
+
+# Compact output (no pretty formatting)
+linkedin-pdf-parser ./resume.pdf --compact
+
+# Include raw extracted text
+linkedin-pdf-parser ./resume.pdf --raw-text
 ```
+
+### Real-world Examples
+```bash
+# Process multiple PDFs
+for pdf in *.pdf; do
+  linkedin-pdf-parser "$pdf" > "${pdf%.pdf}.json"
+done
+
+# Extract specific data with jq
+linkedin-pdf-parser resume.pdf | jq '.profile.name'
+linkedin-pdf-parser resume.pdf | jq '.profile.contact.email'
+linkedin-pdf-parser resume.pdf | jq '.profile.experience[].company'
+```
+
+### CLI Options
+- `--compact` - Compact JSON output (no formatting)
+- `--raw-text` - Include raw extracted text in output
+- `--help, -h` - Show help message
+
+**📖 See [CLI_USAGE.md](CLI_USAGE.md) for complete CLI documentation**
 
 **Note:** Starting from v1.0.2, `pdf-parse` is a peer dependency to minimize bundle size.
 
@@ -207,6 +248,32 @@ interface Experience {
   description?: string;
 }
 ```
+
+**Work Experience Structure:**
+- **Work Experience**: A continuous period of employment at an organization, even if the person returns to the same company later after working elsewhere
+- **Organization/Company**: The employer entity (e.g., "TechCorp", "DataSystems Inc")
+- **Position/Role**: The job title/role within that work experience period (e.g., "Engineering Manager", "Senior Developer")
+
+**Examples:**
+
+*Single organization, multiple positions:*
+```
+TechCorp (1 work experience, 3 positions):
+- Engineering Manager
+- Senior Developer
+- Software Developer
+```
+
+*Same organization, separate work experiences:*
+```
+DataSystems Inc (2 separate work experiences, 2 positions):
+1st work experience: Lead Engineer (2018-2020)
+2nd work experience: Technical Architect (2023-Present)
+// Note: Person worked elsewhere between 2020-2023
+```
+
+**Key principle:** If someone returns to the same company after working elsewhere, it counts as a separate work experience. This reflects career progression and different employment periods.
+
 </details>
 
 <details>
